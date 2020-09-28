@@ -8,17 +8,13 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 27 Sep 2020 21:13:14 -0500</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Title emmmmm</title>
-      <link>/2020/09/27/title-emmmmm/</link>
+      <title>COVID-19 Should be Taken Seriously</title>
+      <link>/2020/09/27/covid-19-should-be-taken-seriously/</link>
       <pubDate>Sun, 27 Sep 2020 21:13:14 -0500</pubDate>
       
-      <guid>/2020/09/27/title-emmmmm/</guid>
-      <description>Part I. Abstraction My abstract. We use Wickham et al. (2019)
- Introduction My introduction.
- Data Introduction Introduce the scenario and study objective. Types of data variable.
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min.</description>
+      <guid>/2020/09/27/covid-19-should-be-taken-seriously/</guid>
+      <description>Part I. Abstraction Through analyze the information of cases of COVID-19 in Toronto, we gain better understanding of the virus and the safety precautions we can make. We used (Gelfand 2020; Wickham et al. 2019), both codes and their descriptions.
+ Introduction The global pandemic of COVID-19 has caused endless problems to our lives, since the beginning of 2020. In the mean time of fighting against the disease, Toronto Public Health has collected detailed information about every reported or probable case.</description>
     </item>
     
   </channel>

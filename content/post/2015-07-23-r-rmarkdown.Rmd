@@ -1,5 +1,5 @@
 ---
-title: "Title emmmmm"
+title: "COVID-19 Should be Taken Seriously"
 author: "Yuze Kang"
 date: 2020-09-27T21:13:14-05:00
 bibliography: "references.bib"
@@ -8,42 +8,90 @@ tags: ["R Markdown", "plot", "regression"]
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, echo = FALSE)
+library(tidyverse)
+library(opendatatoronto)
+C19_package <- show_package("64b54586-6180-4485-83eb-81e8fae3b8fe")
+C19resources <- list_package_resources("64b54586-6180-4485-83eb-81e8fae3b8fe")
+C19datas_resources <- filter(C19resources, tolower(format) %in% c('csv', 'geojson'))
+C19_raw_data <- filter(C19datas_resources, row_number()==1) %>% get_resource()
 ```
 
 # Part I. Abstraction
-My abstract. We use @citetidyverse
+Through analyze the information of cases of COVID-19 in Toronto, we gain better understanding of the virus and the safety precautions we can make. We used [@citeopendatatoronto;@citetidyverse], both codes and their descriptions.
 
 # Introduction
-My introduction.
+The global pandemic of COVID-19 has caused endless problems to our lives, since the beginning of 2020. In the mean time of fighting against the disease, Toronto Public Health has collected detailed information about every reported or probable case. Analysis of these data might give us an idea of questions such as whether the virus attacks every person indifferently or it might target a certain group of people, and might enlighten us what proper precautions we can make to protect ourselves.
 
 # Data Introduction
-Introduce the scenario and study objective.
-Types of data variable.
+This dataset include all reported or probable cases of COVID-19 recorded by Toronto Public Health, since January 2020. It displays demographic, geographic, and severity information of every case.
+Firstly, let us give a glimpse at the dataset:
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-fit <- lm(dist ~ speed, data = cars)
-fit
+```{r echo=FALSE}
+glimpse(C19_raw_data)
 ```
 
-# Including Plots
+There are 18 variables in total, despite "_id" and "Assigned_ID", they represent:
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
+*Outbreak Associated: Outbreak associated cases are associated with outbreaks of COVID-19 in Toronto congregate settings(such as health institutions or homeless shelter etc.).
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
+*Age Group: Age groups (in years) the client is in: ≤19, 20-29, 30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90+, unknown (blank)
+
+*Neighborhood Name: The neighbourhood the client lives in.
+
+*FSA: Forward Sortation Area, first three letters of the postal code of the client.
+
+*Source of Infection: The most probable way that a sporadic case might acquire the infection. 
+
+*Classification: Whether this case is confirmed or probable, according to standards.
+
+*Episode Date: the estimated date of acquisition.
+
+*Reported Date: the date the case is reported.
+
+*Client Gender: gender of the client.
+
+*Outcome: whether the case is resolved or in progress or fatal.
+
+*Currently Hospitalized: whether the client is in hospital.
+
+*Currently In ICU: whether the client is in ICU.
+
+*Currently Intubated: whether the client is intubated.
+
+*Ever Hospitalized: Has the client ever hospitalized.
+
+*Ever in ICU: Has the client ever been in ICU.
+
+*Ever Intubated: Has the client ever intubated.
+
+# Data Analysis
+
+1.Age group
+```{r echo=FALSE}
+C19_raw_data %>% group_by(`Age Group`) %>% ggplot(aes(x=`Age Group`))+geom_histogram(stat = "count", color="grey", fill="blue")
 ```
 
+According to the plot we drawn according to data, which displays how many cases in each age group, the number of cases actually peaks at the 20-29 group, which seems to contradicts to the general opinion that more of elderly people are infected with COVID-19. In fact at all ages the number of case remains over 1000. The plot is right-skewd so the median be aroud 30s to 40s.
+
+2.Source of Infection
+```{r echo=FALSE}
+C19_raw_data %>% group_by(`Source of Infection`) %>% ggplot(aes(x=`Source of Infection`))+geom_bar()+theme_bw()
+```
+
+In the barplot we draw according to the source of infection, it is obvious that most clients acquired infection through close contact and outbreak association, which happens to prove the importance of social distancing.
+
+3.Outcome
+```{r echo=FALSE}
+C19_raw_data %>% group_by("Outcome") %>% ggplot(aes(x=`Outcome`))+geom_bar()+coord_flip()
+```
+
+It is clear that most of cases are resolved.
+
+# Discussion
+In conclusion, the close contact between people and carriers of virus does lead to people's probable acquisition of infection and is one of the most common reasons. And younger population should pay attention to self-protection during pandemic as people at all ages could be infected with similar probability.
+The analysis we made all used barplots and histogram, as we do not have a numerical variable here, we need to conduct deeper analysis. The data may constantly changing as the pandemic is mot over yet, but most importantly, everyone should take COVID-19 seriously.
 
 # Reference
+
+Toronto Public Health, 2020. About COVID-19 Cases in Toronto https://open.toronto.ca/dataset/covid-19-cases-in-toronto/

@@ -62,7 +62,7 @@
 
   <article class="article">
     
-    <span class="article-duration">2 min read</span>
+    <span class="article-duration">3 min read</span>
     
 
     <h1 class="article-title">Title emmmmm</h1>
@@ -77,56 +77,54 @@
 
 <div id="part-i.-abstraction" class="section level1">
 <h1>Part I. Abstraction</h1>
-<p>My abstract. We use <span class="citation">Wickham et al. (2019)</span></p>
+<p>My abstract. I used <span class="citation">(Gelfand 2020; Wickham et al. 2019)</span>, both codes and their descriptions.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>My introduction.</p>
+<p>The global pandemic of COVID-19 has caused endless problems to our lives, since the beginning of 2020. In the mean time of fighting against the disease, Toronto Public Health has collected detailed information about every reported or probable case. Analysis of these data might give us an idea of questions such as whether the virus attacks every person indifferently or it might target a certain group of people.</p>
 </div>
 <div id="data-introduction" class="section level1">
 <h1>Data Introduction</h1>
-<p>Introduce the scenario and study objective.
-Types of data variable.</p>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932</code></pre>
+<p>This dataset include all reported or probable cases of COVID-19 recorded by Toronto Public Health, since January 2020. It displays demographic, geographic, and severity information of every case.
+Firstly, let us give a glimpse at the dataset:</p>
+<pre><code>## function (..., list = character(), package = NULL, lib.loc = NULL, verbose = getOption(&quot;verbose&quot;), 
+##     envir = .GlobalEnv, overwrite = TRUE)</code></pre>
+<p>There are 18 variables in total, despite "_id" and “Assigned_ID”, they represent:</p>
+<p>*Outbreak Associated: Outbreak associated cases are associated with outbreaks of COVID-19 in Toronto congregate settings(such as health institutions or homeless shelter etc.).</p>
+<p>*Age Group: Age groups (in years) the client is in: ≤19, 20-29, 30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90+, unknown (blank)</p>
+<p>*Neighborhood Name: The neighbourhood the client lives in.</p>
+<p>*FSA: Forward Sortation Area, first three letters of the postal code of the client.</p>
+<p>*Source of Infection: The most probable way that a sporadic case might acquire the infection.</p>
+<p>*Classification: Whether this case is confirmed or probable, according to standards.</p>
+<p>*Episode Date: the estimated date of acquisition.</p>
+<p>*Reported Date: the date the case is reported.</p>
+<p>*Client Gender: gender of the client.</p>
+<p>*Outcome: whether the case is resolved or in progress or fatal.</p>
+<p>*Currently Hospitalized: whether the client is in hospital.</p>
+<p>*Currently In ICU: whether the client is in ICU.</p>
+<p>*Currently Intubated: whether the client is intubated.</p>
+<p>*Ever Hospitalized: Has the client ever hospitalized.</p>
+<p>*Ever in ICU: Has the client ever been in ICU.</p>
+<p>*Ever Intubated: Has the client ever intubated.</p>
 </div>
-<div id="including-plots" class="section level1">
-<h1>Including Plots</h1>
-<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
-<pre class="r"><code>par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
-  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
-  init.angle = -50, border = NA
-)</code></pre>
-<div class="figure"><span id="fig:pie"></span>
-<img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
-<p class="caption">
-Figure 1: A fancy pie chart.
-</p>
-</div>
+<div id="data-analysis" class="section level1">
+<h1>Data Analysis</h1>
+<p>1.Age group</p>
+<pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>According to the barplot we drawn according to data, which displays how many cases in each age group, the number of cases actually peaks at the 20-29 group, which seems to contradicts to the general opinion that more of elderly people are infected with COVID-19.</p>
+<p>2.Source of Infection</p>
+<pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>In the barplot we draw according to the source of infection, it is obvious that most clients acquired infection through close contact and outbreak association, which happens to prove the importance of social distancing.</p>
+<p>3.Outcome</p>
 </div>
 <div id="reference" class="section level1 unnumbered">
 <h1>Reference</h1>
 <div id="refs" class="references">
+<div id="ref-citeopendatatoronto">
+<p>Gelfand, Sharla. 2020. <em>Opendatatoronto: Access the City of Toronto Open Data Portal</em>.</p>
+</div>
 <div id="ref-citetidyverse">
 <p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>
 </div>
